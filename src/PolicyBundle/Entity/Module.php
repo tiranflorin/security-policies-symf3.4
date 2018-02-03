@@ -1,20 +1,15 @@
 <?php
 namespace PolicyBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="policy")
+ * @ORM\Table(name="module")
  */
-class Policy
+class Module
 {
-    const ACTION_DELETE = 'delete';
-    const ACTION_QUARANTINE = 'move to quarantine';
-    const ACTION_IGNORE = 'ignore';
-
     /**
      * @Groups({"rest"})
      *
@@ -34,27 +29,16 @@ class Policy
     /**
      * @Groups({"rest"})
      *
-     * @ORM\Column(type="string", name="implicit_action")
+     * @ORM\Column(type="boolean")
      */
-    private $implicitAction;
+    private $status;
 
     /**
-     * One Policy has Many Modules.
-     * @ORM\OneToMany(targetEntity="Module", mappedBy="policy")
+     * Many Modules have One Policy.
+     * @ORM\ManyToOne(targetEntity="Policy", inversedBy="modules")
+     * @ORM\JoinColumn(name="policy_id", referencedColumnName="id")
      */
-    private $modules;
-
-    public function __construct() {
-        $this->modules = new ArrayCollection();
-    }
-
-    public function setImplicitAction($action)
-    {
-        if (!in_array($action, array(self::ACTION_DELETE, self::ACTION_QUARANTINE, self::ACTION_IGNORE))) {
-            throw new \InvalidArgumentException("Invalid action!");
-        }
-        $this->implicitAction = $action;
-    }
+    private $policy;
 
     /**
      * @return mixed
@@ -91,24 +75,32 @@ class Policy
     /**
      * @return mixed
      */
-    public function getImplicitAction()
+    public function getStatus()
     {
-        return $this->implicitAction;
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
     /**
      * @return mixed
      */
-    public function getModules()
+    public function getPolicy()
     {
-        return $this->modules;
+        return $this->policy;
     }
 
     /**
-     * @param mixed $modules
+     * @param mixed $policy
      */
-    public function setModules($modules)
+    public function setPolicy($policy)
     {
-        $this->modules = $modules;
+        $this->policy = $policy;
     }
 }
