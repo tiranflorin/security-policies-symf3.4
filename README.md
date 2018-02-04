@@ -1,15 +1,15 @@
-Symfony Standard Edition
-========================
+Security Policies API 
+=====================
+
+1. Run composer install
+2. Make sure the files in the "var" directory have adequate permissions (I just add 777 for dev purposes).
+3. Add the app/config/parameters.yml file. Here the db credentials need to be added.
+4. API request example: http://localhost/path_to_dir/security-policies-symf3.4/web/app_dev.php/policy
+
+More info: 
+
+https://symfony.com/doc/3.4/setup.html
+
+Based on symfony standard edition.
 
 Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
